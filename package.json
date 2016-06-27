@@ -1,0 +1,25 @@
+{
+  "name": "merkle-tools",
+  "version": "1.0.0",
+  "description": "Tools for creating Merkle trees, generating merkle proofs, and verification of merkle proofs.",
+  "main": "merkletools.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tierion/merkle-tools.git"
+  },
+  "keywords": [
+    "merkle tree",
+    "merkle proof",
+    "merkle",
+    "chainpoint"
+  ],
+  "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tierion/merkle-tools/issues"
+  },
+  "homepage": "https://github.com/Tierion/merkle-tools#readme"
+}
