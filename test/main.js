@@ -22,7 +22,7 @@ describe("make tree with addLeaves hex", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), mRoot.toString('hex'));
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), mRoot.toString('hex'));
     });
 
 });
@@ -36,7 +36,7 @@ describe("make tree with addLeaves buffers", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), mRoot.toString('hex'));
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), mRoot.toString('hex'));
     });
 
 });
@@ -65,7 +65,7 @@ describe("make tree with addLeaf hex", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), mRoot.toString('hex'));
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), mRoot.toString('hex'));
     });
 
 });
@@ -78,7 +78,7 @@ describe("make tree with addLeaf buffers", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), mRoot.toString('hex'));
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), mRoot.toString('hex'));
     });
 
 });
@@ -102,7 +102,7 @@ describe("make tree with 1 leaf", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb');
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb');
     });
 
 });
@@ -120,7 +120,7 @@ describe("make tree with 5 leaves", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
     });
 
 }); 
@@ -136,7 +136,7 @@ describe("make tree with 5 leaves individually needing hashing", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
     });
 
 }); 
@@ -148,7 +148,7 @@ describe("make tree with 5 leaves at once needing hashing", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
     });
 
 });
@@ -160,7 +160,7 @@ describe("make tree using md5", function () {
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
-        assert.equal(merkleTools.getMerkleRoot(), mRootmd5.toString('hex'));
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), mRootmd5.toString('hex'));
     });
 
 });

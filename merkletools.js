@@ -89,7 +89,7 @@ var MerkleTools = function (treeOptions) {
     // Returns the merkle root value for the tree
     this.getMerkleRoot = function () {
         if (!tree.isReady) return null;
-        return tree.levels[0][0].toString('hex');
+        return tree.levels[0][0];
     };
 
     // Returns the proof for a leaf at the given index as an array of merkle siblings in hex format
