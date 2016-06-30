@@ -120,7 +120,7 @@ The proof array contains a set of merkle sibling objects. Each object contains t
 Returns a boolean indicating whether or not the proof is valid and correctly connects the targetHash to the merkleRoot. Proof is a proof array as supplied by the 'getProof' method. The targetHash and merkleRoot parameters must be Buffers or hex strings.
 
 ```js
-var proof == [
+var proof = [
    { right: '09096dbc49b7909917e13b795ebf289ace50b870440f10424af8845fb7761ea5' },
    { right: 'ed2456914e48c1e17b7bd922177291ef8b7f553edf1b1f66b6fc1a076524b22f' },
    { left: 'eac53dde9661daf47a428efea28c81a021c06d64f98eeabbdcff442d992153a8' },
