@@ -38,16 +38,18 @@ var MerkleTools = function (treeOptions) {
 
     // Add a leaf to the tree
     // Accepts hash value as a Buffer or hex string
-    this.addLeaf = function (value) {
+    this.addLeaf = function (value, doHash) {
         tree.isReady = false;
+        if (doHash) value = hashFunction(value);
         tree.leaves.push(_getBuffer(value));
     };
 
     // Add a leaves to the tree
     // Accepts hash values as an array of Buffers or hex strings
-    this.addLeaves = function (valuesArray) {
+    this.addLeaves = function (valuesArray, doHash) {
         tree.isReady = false;
         valuesArray.forEach(function (value) {
+            if (doHash) value = hashFunction(value);
             tree.leaves.push(_getBuffer(value));
         });
     };
@@ -68,7 +70,7 @@ var MerkleTools = function (treeOptions) {
     // Returns the ready state of the tree
     this.getTreeReadyState = function () {
         return tree.isReady;
-    };    
+    };
 
     // Generates the merkle tree 
     this.makeTree = function () {
@@ -148,7 +150,18 @@ var MerkleTools = function (treeOptions) {
     // Internally, trees are made of nodes containing Buffer values only
     // This helps ensure that leaves being added are Buffers, and will convert hex to Buffer if needed
     function _getBuffer(value) {
-        return (value instanceof Buffer ? value : new Buffer(value, 'hex'));
+        if (value instanceof Buffer) { // we already have a buffer, so return it
+            return value;
+        } else if (_isHex(value)) { // the value is a hex string, convert to buffer and return
+            return new Buffer(value, 'hex');
+        } else { // the value is neither buffer nor hex string, will not process this, throw error
+            throw new Error("Bad hex value - '" + value + "'");
+        }
+    }
+
+    function _isHex(value) { 
+        var hexRegex = /^[0-9A-Fa-f]{2,}$/;
+        return hexRegex.test(value);
     }
 
     // Calculates the next level of node when building the merkle tree

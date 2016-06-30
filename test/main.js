@@ -80,6 +80,16 @@ describe("make tree with addLeaf buffers", function () {
 
 });
 
+describe("make tree with addLeaf bad hex", function () {
+
+    var merkleTools = new merkletools();
+
+    it("error should be thrown", function () {
+        assert.throws( function() { merkleTools.addLeaf('nothexandnothashed'); }, Error );
+    });
+
+});
+
 describe("make tree with 1 leaf", function () {
 
     var merkleTools = new merkletools();
@@ -104,6 +114,34 @@ describe("make tree with 5 leaves", function () {
         '18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4',
         '3f79bb7b435b05321651daefd374cdc681dc06faa65e374e38337b88ca046dea'
     ]);
+    merkleTools.makeTree();
+
+    it("merkle root value should be correct", function () {
+        assert.equal(merkleTools.getMerkleRoot(), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+    });
+
+}); 
+
+describe("make tree with 5 leaves individually needing hashing", function () {
+
+    var merkleTools = new merkletools();
+    merkleTools.addLeaf('a', true);
+    merkleTools.addLeaf('b', true);
+    merkleTools.addLeaf('c', true);
+    merkleTools.addLeaf('d', true);
+    merkleTools.addLeaf('e', true);
+    merkleTools.makeTree();
+
+    it("merkle root value should be correct", function () {
+        assert.equal(merkleTools.getMerkleRoot(), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+    });
+
+}); 
+
+describe("make tree with 5 leaves at once needing hashing", function () {
+
+    var merkleTools = new merkletools();
+    merkleTools.addLeaves([ 'a', 'b', 'c', 'd', 'e'], true);
     merkleTools.makeTree();
 
     it("merkle root value should be correct", function () {
@@ -201,12 +239,12 @@ describe("validate good proof 5 leaves", function () {
         '3f79bb7b435b05321651daefd374cdc681dc06faa65e374e38337b88ca046dea'
     ]);
     merkleTools.makeTree();
-    var proof = merkleTools.getProof(0);
-    var isValid = merkleTools.validateProof(proof, 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+    var proof = merkleTools.getProof(4);
+    var isValid = merkleTools.validateProof(proof, '3f79bb7b435b05321651daefd374cdc681dc06faa65e374e38337b88ca046dea', 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
 
 
     it("proof should be valid", function () {
         assert.equal(isValid, true);
-    });
+    }); 
     
-});
+}); 
