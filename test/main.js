@@ -7,6 +7,9 @@ var merkletools = require('../merkletools.js');
 var bLeft = new Buffer('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex');
 var bRight = new Buffer('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex');
 var mRoot = crypto.createHash('sha256').update(Buffer.concat([bLeft, bRight])).digest();
+var bLeftmd5 = new Buffer('0cc175b9c0f1b6a831c399e269772661', 'hex');
+var bRightmd5 = new Buffer('92eb5ffee6ae2fec3ad71c777531578f', 'hex');
+var mRootmd5 = crypto.createHash('md5').update(Buffer.concat([bLeftmd5, bRightmd5])).digest();
 
 
 describe("make tree with addLeaves hex", function () {
@@ -146,6 +149,18 @@ describe("make tree with 5 leaves at once needing hashing", function () {
 
     it("merkle root value should be correct", function () {
         assert.equal(merkleTools.getMerkleRoot(), 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+    });
+
+});
+
+describe("make tree using md5", function () {
+
+    var merkleTools = new merkletools({ hashType: 'md5'});
+    merkleTools.addLeaves([ bLeftmd5, bRightmd5]);
+    merkleTools.makeTree();
+
+    it("merkle root value should be correct", function () {
+        assert.equal(merkleTools.getMerkleRoot(), mRootmd5.toString('hex'));
     });
 
 });
