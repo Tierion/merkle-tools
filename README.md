@@ -17,7 +17,7 @@ $ npm install --save merkle-tools
 var merkletools = require('merkle-tools');
 
 var treeOptions = {
-  hashType: 'md5', // optional, any valid crypto hash algorithm, defaults to 'sha256'
+  hashType: 'md5' // optional, any valid crypto hash algorithm, defaults to 'sha256'
 };
 
 var merkleTools = new merkletools(treeOptions); // treeOptions is optional
