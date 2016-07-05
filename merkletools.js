@@ -133,9 +133,9 @@ var MerkleTools = function (treeOptions) {
 
         var proofHash = targetHash;
         for (var x = 0; x < proof.length; x++) {
-            if (proof[x].left !== undefined) { // then the sibling is a left node
+            if (proof[x].left) { // then the sibling is a left node
                 proofHash = hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash]));
-            } else if (proof[x].right !== undefined) { // then the sibling is a right node
+            } else if (proof[x].right) { // then the sibling is a right node
                 proofHash = hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)]));
             } else { // no left or right designation exists, proof is invalid
                 return false;
