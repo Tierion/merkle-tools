@@ -263,3 +263,24 @@ describe("validate good proof 5 leaves", function () {
     }); 
     
 }); 
+
+describe("validate good proof 5 leaves B", function () {
+
+    var merkleTools = new merkletools();
+    merkleTools.addLeaves([
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb',
+        '3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d',
+        '2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6',
+        '18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4',
+        '3f79bb7b435b05321651daefd374cdc681dc06faa65e374e38337b88ca046dea'
+    ]);
+    merkleTools.makeTree();
+    var proof = merkleTools.getProof(1);
+    var isValid = merkleTools.validateProof(proof, '3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d', 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba');
+
+
+    it("proof should be valid", function () {
+        assert.equal(isValid, true);
+    }); 
+    
+}); 
