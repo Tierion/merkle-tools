@@ -88,7 +88,7 @@ var MerkleTools = function (treeOptions) {
 
     // Returns the merkle root value for the tree
     this.getMerkleRoot = function () {
-        if (!tree.isReady) return null;
+        if (!tree.isReady || tree.levels.length === 0) return null;
         return tree.levels[0][0];
     };
 

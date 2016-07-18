@@ -11,6 +11,17 @@ var bLeftmd5 = new Buffer('0cc175b9c0f1b6a831c399e269772661', 'hex');
 var bRightmd5 = new Buffer('92eb5ffee6ae2fec3ad71c777531578f', 'hex');
 var mRootmd5 = crypto.createHash('md5').update(Buffer.concat([bLeftmd5, bRightmd5])).digest();
 
+describe("make tree with no leaves", function () {
+
+    var merkleTools = new merkletools();
+    merkleTools.makeTree();
+
+    it("merkle root value should be null", function () {
+        assert.equal(merkleTools.getMerkleRoot(), null);
+    });
+
+});
+
 
 describe("make tree with addLeaves hex", function () {
 
