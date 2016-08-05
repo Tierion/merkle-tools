@@ -1,6 +1,6 @@
 {
   "name": "merkle-tools",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Tools for creating merkle trees, generating merkle proofs, and verification of merkle proofs.",
   "main": "merkletools.js",
   "scripts": {

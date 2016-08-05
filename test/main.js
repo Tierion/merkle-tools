@@ -81,6 +81,46 @@ describe("make tree with addLeaf hex", function () {
 
 });
 
+describe("make tree with addLeaves hex", function () {
+
+    var hashes = [];
+    hashes.push('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb');
+    hashes.push('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c');
+
+    var merkleTools = new merkletools();
+    merkleTools.addLeaves(hashes);
+    merkleTools.makeTree();
+    var targetProof0 = merkleTools.getProof(0);
+    var targetProof1 = merkleTools.getProof(1);
+
+    it("merkle root value should be correct", function () {
+        assert.equal(merkleTools.getMerkleRoot().toString('hex'), mRoot.toString('hex'));
+        assert.equal(targetProof0.length, 1);
+        assert.equal(targetProof1.length, 1);
+    });
+
+});
+
+describe("make tree with addLeaves hex", function () {
+
+    var hashes = [];
+    hashes.push('2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae');
+    hashes.push('2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae');
+
+    var merkleTools = new merkletools();
+    merkleTools.addLeaves(hashes);
+    merkleTools.makeTree();
+    var targetProof0 = merkleTools.getProof(0);
+    var targetProof1 = merkleTools.getProof(1);
+
+    it("merkle root value should be correct", function () {
+        //assert.equal(merkleTools.getMerkleRoot().toString('hex'), 'e9fca0aee4dbbb93914ef2ef6e6da0df938fb0f29afe6ec5b875e1cee997a5c1');
+        assert.equal(targetProof0.length, 1);
+        assert.equal(targetProof1.length, 1);
+    });
+
+});
+
 describe("make tree with addLeaf buffers", function () {
 
     var merkleTools = new merkletools();
