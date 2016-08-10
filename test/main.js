@@ -101,27 +101,6 @@ describe("make tree with addLeaves hex", function () {
 
 });
 
-describe("make tree with addLeaves hex", function () {
-
-    var hashes = [];
-    hashes.push('2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae');
-    hashes.push('2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae');
-
-    var merkleTools = new merkletools();
-    merkleTools.addLeaves(hashes);
-    merkleTools.makeTree();
-    merkleTools.addLeaves(hashes);
-    merkleTools.makeTree();
-    var targetProof0 = merkleTools.getProof(0);
-    var targetProof1 = merkleTools.getProof(1);
-
-    it("merkle root value should be correct", function () {
-        assert.equal(targetProof0.length, 1);
-        assert.equal(targetProof1.length, 1);
-    });
-
-});
-
 describe("make tree with addLeaf buffers", function () {
 
     var merkleTools = new merkletools();
