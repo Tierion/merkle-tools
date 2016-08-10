@@ -110,11 +110,12 @@ describe("make tree with addLeaves hex", function () {
     var merkleTools = new merkletools();
     merkleTools.addLeaves(hashes);
     merkleTools.makeTree();
+    merkleTools.addLeaves(hashes);
+    merkleTools.makeTree();
     var targetProof0 = merkleTools.getProof(0);
     var targetProof1 = merkleTools.getProof(1);
 
     it("merkle root value should be correct", function () {
-        //assert.equal(merkleTools.getMerkleRoot().toString('hex'), 'e9fca0aee4dbbb93914ef2ef6e6da0df938fb0f29afe6ec5b875e1cee997a5c1');
         assert.equal(targetProof0.length, 1);
         assert.equal(targetProof1.length, 1);
     });
