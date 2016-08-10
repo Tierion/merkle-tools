@@ -1,6 +1,10 @@
 /*jslint node: true */
 'use strict';
 
+var sha3_512 = require('js-sha3').sha3_512;
+var sha3_384 = require('js-sha3').sha3_384;
+var sha3_256 = require('js-sha3').sha3_256;
+var sha3_224 = require('js-sha3').sha3_224;
 var crypto = require('crypto');
 
 var MerkleTools = function (treeOptions) {
@@ -17,8 +21,20 @@ var MerkleTools = function (treeOptions) {
         }
     }
     var hashFunction = function (value) {
-        return crypto.createHash(hashType).update(value).digest();
+        switch (hashType) {
+            case 'SHA3-224':
+                return new Buffer(sha3_224.array(value));
+            case 'SHA3-256':
+                return new Buffer(sha3_256.array(value));
+            case 'SHA3-384':
+                return new Buffer(sha3_384.array(value));
+            case 'SHA3-512':
+                return new Buffer(sha3_512.array(value));
+            default:
+                return crypto.createHash(hashType).update(value).digest();
+        }
     };
+
     var tree = {};
     tree.leaves = [];
     tree.levels = [];
@@ -160,7 +176,7 @@ var MerkleTools = function (treeOptions) {
         }
     }
 
-    function _isHex(value) { 
+    function _isHex(value) {
         var hexRegex = /^[0-9A-Fa-f]{2,}$/;
         return hexRegex.test(value);
     }
