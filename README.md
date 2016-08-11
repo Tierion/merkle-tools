@@ -5,6 +5,10 @@
 
 Tools for creating Merkle trees, generating merkle proofs, and verification of merkle proofs.
 
+### What's new?
+
+Added support for SHA3 family of hash functions
+
 ## Installation
 
 ```
@@ -17,8 +21,12 @@ $ npm install --save merkle-tools
 var merkletools = require('merkle-tools');
 
 var treeOptions = {
-  hashType: 'md5' // optional, any valid crypto hash algorithm, defaults to 'sha256'
+  hashType: 'md5' // optional, defaults to 'sha256'
 };
+// valid hashTypes include all crypto hash algorithms
+// such as 'MD5', 'SHA1', 'SHA224', 'SHA256', 'SHA384', 'SHA512'
+// as well as the SHA3 family of algorithms
+// including 'SHA3-224', 'SHA3-256', 'SHA3-384', and 'SHA3-512'
 
 var merkleTools = new merkletools(treeOptions); // treeOptions is optional
 ```
