@@ -76,7 +76,7 @@ var leafValue =  merkleTools.getLeaf(5);
 
 ### resetTree()
 
-Removes all the leaves from the tree, prepararing to to begin creating a new tree.
+Removes all the leaves from the tree, prepararing to begin creating a new tree.
 
 ```js
 merkleTools.resetTree();
