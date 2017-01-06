@@ -108,7 +108,7 @@ var MerkleTools = function (treeOptions) {
     };
 
     // Returns the proof for a leaf at the given index as an array of merkle siblings in hex format
-    this.getProof = function (index) {
+    this.getProof = function (index, asBinary) {
         if (!tree.isReady) return null;
         var currentRowIndex = tree.levels.length - 1;
         if (index < 0 || index > tree.levels[currentRowIndex].length - 1) return null; // the index it out of the bounds of the leaf array
@@ -126,12 +126,18 @@ var MerkleTools = function (treeOptions) {
             // determine the sibling for the current index and get its value
             var isRightNode = index % 2;
             var siblingIndex = isRightNode ? (index - 1) : (index + 1);
-            var sibling = {};
-            var siblingPosition = isRightNode ? 'left' : 'right';
-            var siblingValue = tree.levels[x][siblingIndex].toString('hex');
-            sibling[siblingPosition] = siblingValue;
 
-            proof.push(sibling);
+            if (asBinary) {
+                proof.push(new Buffer(isRightNode ? [0x01] : [0x00]));
+                proof.push(tree.levels[x][siblingIndex]);
+            } else {
+                var sibling = {};
+                var siblingPosition = isRightNode ? 'left' : 'right';
+                var siblingValue = tree.levels[x][siblingIndex].toString('hex');
+                sibling[siblingPosition] = siblingValue;
+
+                proof.push(sibling);
+            }
 
             index = Math.floor(index / 2); // set index to the parent index
         }
