@@ -128,7 +128,7 @@ var MerkleTools = function (treeOptions) {
             var siblingIndex = isRightNode ? (index - 1) : (index + 1);
 
             if (asBinary) {
-                proof.push(new Buffer(isRightNode ? [0x01] : [0x00]));
+                proof.push(new Buffer(isRightNode ? [0x00] : [0x01]));
                 proof.push(tree.levels[x][siblingIndex]);
             } else {
                 var sibling = {};

@@ -106,18 +106,33 @@ Returns the merkle root of the tree as a Buffer. If the tree is not ready, null 
 var rootValue = merkleTools.getMerkleRoot();
 ```
 
-### getProof(index)
+### getProof(index, asBinary)
 
-Returns the proof as an array of hash objects for the leaf at the given index. If the tree is not ready or no leaf exists at the given index, null is returned.  
+Returns the proof as an array of hash objects or array of Buffers for the leaf at the given index. If the tree is not ready or no leaf exists at the given index, null is returned.  
 
 ```js
 var proof = merkleTools.getProof(2);
 
+// By default, an array of hash objects is returned
 // example: 
 // proof == [
 //   { right: '09096dbc49b7909917e13b795ebf289ace50b870440f10424af8845fb7761ea5' },
 //   { right: 'ed2456914e48c1e17b7bd922177291ef8b7f553edf1b1f66b6fc1a076524b22f' },
-//   { left: 'eac53dde9661daf47a428efea28c81a021c06d64f98eeabbdcff442d992153a8' },
+//   { left: 'eac53dde9661daf47a428efea28c81a021c06d64f98eeabbdcff442d992153a8' }
+// ]
+
+var proof = merkleTools.getProof(2, true);
+
+// With asBinary set to true, an array of Buffers is returned 
+// 0x00 indicated 'left', 0x01 indicates 'right'
+// example: 
+// proof == [
+//   <Buffer 01>,
+//   <Buffer 09096dbc49b7909917e13b795ebf289ace50b870440f10424af8845fb7761ea5>,
+//   <Buffer 01>
+//   <Buffer ed2456914e48c1e17b7bd922177291ef8b7f553edf1b1f66b6fc1a076524b22f>,
+//   <Buffer 00>
+//   <Buffer eac53dde9661daf47a428efea28c81a021c06d64f98eeabbdcff442d992153a8>
 // ]
 ```
 

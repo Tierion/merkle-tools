@@ -224,6 +224,36 @@ describe("Test basic functions", function () {
 
     });
 
+    describe("proof left node binary", function () {
+
+        var merkleTools = new merkletools();
+        merkleTools.addLeaf(bLeft);
+        merkleTools.addLeaf(bRight);
+        merkleTools.makeTree();
+        var proof = merkleTools.getProof(0, true);
+
+        it("binary proof array should be correct", function () {
+            var expectedResult = [new Buffer([0x01]), new Buffer('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')];
+            proof.should.deepEqual(expectedResult);
+        });
+
+    });
+
+    describe("proof right node binary", function () {
+
+        var merkleTools = new merkletools();
+        merkleTools.addLeaf(bLeft);
+        merkleTools.addLeaf(bRight);
+        merkleTools.makeTree();
+        var proof = merkleTools.getProof(1, true);
+
+        it("binary proof array should be correct", function () {
+            var expectedResult = [new Buffer([0x00]), new Buffer('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')];
+            proof.should.deepEqual(expectedResult);
+        });
+
+    });
+
     describe("proof one node", function () {
 
         var merkleTools = new merkletools();
