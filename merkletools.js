@@ -89,13 +89,26 @@ var MerkleTools = function (treeOptions) {
     };
 
     // Generates the merkle tree 
-    this.makeTree = function () {
+    this.makeTree = function (doubleHash) {
         tree.isReady = false;
         var leafCount = tree.leaves.length;
         if (leafCount > 0) { // skip this whole process if there are no leaves added to the tree
             tree.levels.unshift(tree.leaves);
             while (tree.levels[0].length > 1) {
-                tree.levels.unshift(_calculateNextLevel());
+                tree.levels.unshift(_calculateNextLevel(doubleHash));
+            }
+        }
+        tree.isReady = true;
+    };
+
+    // Generates a Bitcoin style merkle tree 
+    this.makeBTCTree = function (doubleHash) {
+        tree.isReady = false;
+        var leafCount = tree.leaves.length;
+        if (leafCount > 0) { // skip this whole process if there are no leaves added to the tree
+            tree.levels.unshift(tree.leaves);
+            while (tree.levels[0].length > 1) {
+                tree.levels.unshift(_calculateBTCNextLevel(doubleHash));
             }
         }
         tree.isReady = true;
@@ -189,16 +202,39 @@ var MerkleTools = function (treeOptions) {
 
     // Calculates the next level of node when building the merkle tree
     // These values are calcalated off of the current highest level, level 0 and will be prepended to the levels array
-    function _calculateNextLevel() {
+    function _calculateNextLevel(doubleHash) {
         var nodes = [];
         var topLevel = tree.levels[0];
         var topLevelCount = topLevel.length;
         for (var x = 0; x < topLevelCount; x += 2) {
-            if (x + 1 <= topLevelCount - 1) { // concatonate and hash the pair, add to the next level array
-                nodes.push(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]])));
+            if (x + 1 <= topLevelCount - 1) { // concatonate and hash the pair, add to the next level array, doubleHash if requested
+                if (doubleHash) {
+                    nodes.push(hashFunction(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]]))));
+                } else {
+                    nodes.push(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]])));
+                }
             }
             else { // this is an odd ending node, promote up to the next level by itself
                 nodes.push(topLevel[x]);
+            }
+        }
+        return nodes;
+    }
+
+    // This version uses the BTC method of duplicating the odd ending nodes
+    function _calculateBTCNextLevel(doubleHash) {
+        var nodes = [];
+        var topLevel = tree.levels[0];
+        var topLevelCount = topLevel.length;
+        if (topLevelCount % 2 === 1) { // there is an odd count, duplicate the last element
+            topLevel.push(topLevel[topLevelCount - 1]);
+        }
+        for (var x = 0; x < topLevelCount; x += 2) {
+            // concatonate and hash the pair, add to the next level array, doubleHash if requested
+            if (doubleHash) {
+                nodes.push(hashFunction(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]]))));
+            } else {
+                nodes.push(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]])));
             }
         }
         return nodes;

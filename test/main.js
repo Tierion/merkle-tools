@@ -184,6 +184,68 @@ describe("Test basic functions", function () {
 
     });
 
+    describe("make tree using makeBTCTree odd leaves", function () {
+
+        var merkleTools = new merkletools();
+
+        var hashes = [
+            '1a02db5db5a24c5edc5b653051d8aaaddec3f9abc30354f7df358c49fe40f735',
+            'd3f3eb471e368a27f5320ff7a961bed748519139435cf8348e84ebd6225d7150',
+            '7cbcf6b5378e3e43b39734baa578efa501d02abf90289547f0e6621ee959f0e3'
+        ];
+        for (var x = 0; x < hashes.length; x++) {
+            hashes[x] = hashes[x].match(/.{2}/g).reverse().join('');
+        }
+        merkleTools.addLeaves(hashes);
+        merkleTools.makeBTCTree(true);
+
+        it("merkle root value should be correct", function () {
+            assert.equal(merkleTools.getMerkleRoot().toString('hex').match(/.{2}/g).reverse().join(''), '7099d100635a0e5f62ef12a8420c99426a408951078f191a0f63ddedc4dcd198');
+        });
+
+    });
+
+    describe("make tree using makeBTCTree one leaf", function () {
+
+        var merkleTools = new merkletools();
+
+        var hashes = [
+            '9c397f783042029888ec02f0a461cfa2cc8e3c7897f476e338720a2a86731c60'
+        ];
+        for (var x = 0; x < hashes.length; x++) {
+            hashes[x] = hashes[x].match(/.{2}/g).reverse().join('');
+        }
+        merkleTools.addLeaves(hashes);
+        merkleTools.makeBTCTree(true);
+
+        it("merkle root value should be correct", function () {
+            assert.equal(merkleTools.getMerkleRoot().toString('hex').match(/.{2}/g).reverse().join(''), '9c397f783042029888ec02f0a461cfa2cc8e3c7897f476e338720a2a86731c60');
+        });
+
+    });
+
+    describe("make tree using makeBTCTree even leaves", function () {
+
+        var merkleTools = new merkletools();
+
+        var hashes = [
+            '6584fd6a4d0a96e27f1f0f8549a206bc9367134064d45decd2116ca7d73e6cc4',
+            '7e2087abb091d059749a6bfd36840743d818de95a39975c18fc5969459eb00b2',
+            'd45f9b209556d52db69a900703dacd934701bb523cd2a03bf48ec658133e511a',
+            '5ec499041da320458cf1719d06af02fecc97d3178739f4d331c4fb84c764933d'
+        ];
+        for (var x = 0; x < hashes.length; x++) {
+            hashes[x] = hashes[x].match(/.{2}/g).reverse().join('');
+        }
+        merkleTools.addLeaves(hashes);
+        merkleTools.makeTree(true);
+
+        it("merkle root value should be correct", function () {
+            assert.equal(merkleTools.getMerkleRoot().toString('hex').match(/.{2}/g).reverse().join(''), 'b02c190b3a4d8a32b2f053ffd6353495fb857ad03ff600002c581a3a2232f696');
+        });
+
+    });
+
     describe("make tree using md5", function () {
 
         var merkleTools = new merkletools({ hashType: 'md5' });
