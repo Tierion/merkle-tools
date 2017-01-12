@@ -93,6 +93,7 @@ var MerkleTools = function (treeOptions) {
         tree.isReady = false;
         var leafCount = tree.leaves.length;
         if (leafCount > 0) { // skip this whole process if there are no leaves added to the tree
+            tree.levels = [];
             tree.levels.unshift(tree.leaves);
             while (tree.levels[0].length > 1) {
                 tree.levels.unshift(_calculateNextLevel(doubleHash));
@@ -106,6 +107,7 @@ var MerkleTools = function (treeOptions) {
         tree.isReady = false;
         var leafCount = tree.leaves.length;
         if (leafCount > 0) { // skip this whole process if there are no leaves added to the tree
+            tree.levels = [];
             tree.levels.unshift(tree.leaves);
             while (tree.levels[0].length > 1) {
                 tree.levels.unshift(_calculateBTCNextLevel(doubleHash));
