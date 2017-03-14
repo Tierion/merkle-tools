@@ -101,7 +101,7 @@ merkleTools.makeBTCTree(doubleHash);
 
 ### getTreeReadyState()
 
-Returns boolean indicating if the tree is build and ready to supply its root and proofs. The Ready state is True only after the tree is built with 'makeTree'.  Adding leaves or restting the tree will change the ready state to False.
+Returns boolean indicating if the tree is build and ready to supply its root and proofs. The Ready state is True only after the tree is built with 'makeTree'.  Adding leaves or resetting the tree will change the ready state to False.
 
 ```js
 var isReady =  merkleTools.getTreeReadyState();
