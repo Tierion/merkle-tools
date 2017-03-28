@@ -4,7 +4,7 @@ var Benchmark = require('benchmark')
 
 var suite = new Benchmark.Suite()
 var crypto = require('crypto')
-var MerkleTools = require('../merkletools.js')
+var MerkleTools = require('./merkletools.js')
 
 var merkleTools = new MerkleTools()
 
