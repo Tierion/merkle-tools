@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/l/merkle-tools.svg)](https://www.npmjs.com/package/merkle-tools)
 [![npm](https://img.shields.io/npm/v/merkle-tools.svg)](https://www.npmjs.com/package/merkle-tools)
 
+Tools for creating Merkle trees, generating merkle proofs, and verification of merkle proofs.
 
 ## Installation
 
