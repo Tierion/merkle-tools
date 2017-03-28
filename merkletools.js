@@ -3,7 +3,7 @@
 var sha3512 = require('js-sha3').sha3_512
 var sha3384 = require('js-sha3').sha3_384
 var sha3256 = require('js-sha3').sha3_256
-var sha3224 = require('js-sha3').sha3224
+var sha3224 = require('js-sha3').sha3_224
 var crypto = require('crypto')
 
 var MerkleTools = function (treeOptions) {

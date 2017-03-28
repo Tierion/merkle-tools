@@ -261,7 +261,7 @@ describe('Test basic functions', function () {
 
     it('binary proof array should be correct', function () {
       var expectedResult = [new Buffer([0x01]), new Buffer('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')]
-      proof.should.deepEqual(expectedResult)
+      assert.deepEqual(proof, expectedResult)
     })
   })
 
@@ -274,7 +274,7 @@ describe('Test basic functions', function () {
 
     it('binary proof array should be correct', function () {
       var expectedResult = [new Buffer([0x00]), new Buffer('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')]
-      proof.should.deepEqual(expectedResult)
+      assert.deepEqual(proof, expectedResult)
     })
   })
 
