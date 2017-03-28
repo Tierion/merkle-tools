@@ -26,7 +26,6 @@
     "js-sha3": "^0.5.2"
   },
   "devDependencies": {
-    "mocha": "^2.5.3",
-    "should": "^9.0.2"
+    "mocha": "^2.5.3"
   }
 }

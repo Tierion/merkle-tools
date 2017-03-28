@@ -3,7 +3,6 @@
 [![npm](https://img.shields.io/npm/l/merkle-tools.svg)](https://www.npmjs.com/package/merkle-tools)
 [![npm](https://img.shields.io/npm/v/merkle-tools.svg)](https://www.npmjs.com/package/merkle-tools)
 
-Tools for creating Merkle trees, generating merkle proofs, and verification of merkle proofs.
 
 ## Installation
 
@@ -14,7 +13,7 @@ $ npm install --save merkle-tools
 ### Create MerkleTools Object
 
 ```js
-var merkletools = require('merkle-tools');
+var MerkleTools = require('merkle-tools');
 
 var treeOptions = {
   hashType: 'md5' // optional, defaults to 'sha256'
@@ -24,7 +23,7 @@ var treeOptions = {
 // as well as the SHA3 family of algorithms
 // including 'SHA3-224', 'SHA3-256', 'SHA3-384', and 'SHA3-512'
 
-var merkleTools = new merkletools(treeOptions); // treeOptions is optional
+var merkleTools = new MerkleTools(treeOptions); // treeOptions is optional
 ```
 
 ## Methods
@@ -176,9 +175,9 @@ The proof process uses all the proof objects in the array to attempt to prove a 
 ### Creating a tree and generating the proofs
 
 ```js
-var merkletools = require('merkle-tools');
+var MerkleTools = require('merkle-tools');
 
-var merkleTools = new merkletools(); // no options, defaults to sha-256 hash type
+var merkleTools = new MerkleTools(); // no options, defaults to sha-256 hash type
 
 // add some leaves to the tree
 merkleTools.addLeaf('7d49f074d2c3fa193e305bc109892f20760cbbecc218b43394a9356da35a72b3');
