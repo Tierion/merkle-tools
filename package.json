@@ -4,7 +4,8 @@
   "description": "Tools for creating merkle trees, generating merkle proofs, and verification of merkle proofs.",
   "main": "merkletools.js",
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "mocha test/*.js",
+    "benchmark": "node benchmark.js"
   },
   "repository": {
     "type": "git",
