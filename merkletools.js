@@ -207,7 +207,7 @@ var MerkleTools = function (treeOptions) {
     var topLevel = tree.levels[0]
     var topLevelCount = topLevel.length
     for (var x = 0; x < topLevelCount; x += 2) {
-      if (x + 1 <= topLevelCount - 1) { // concatonate and hash the pair, add to the next level array, doubleHash if requested
+      if (x + 1 <= topLevelCount - 1) { // concatenate and hash the pair, add to the next level array, doubleHash if requested
         if (doubleHash) {
           nodes.push(hashFunction(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]]))))
         } else {
@@ -229,7 +229,7 @@ var MerkleTools = function (treeOptions) {
       topLevel.push(topLevel[topLevelCount - 1])
     }
     for (var x = 0; x < topLevelCount; x += 2) {
-            // concatonate and hash the pair, add to the next level array, doubleHash if requested
+      // concatenate and hash the pair, add to the next level array, doubleHash if requested
       if (doubleHash) {
         nodes.push(hashFunction(hashFunction(Buffer.concat([topLevel[x], topLevel[x + 1]]))))
       } else {
