@@ -7,7 +7,7 @@ var sha3224 = require('js-sha3').sha3_224
 var crypto = require('crypto')
 
 var MerkleTools = function (treeOptions) {
-    // in case 'new' was omitted
+  // in case 'new' was omitted
   if (!(this instanceof MerkleTools)) {
     return new MerkleTools(treeOptions)
   }
@@ -39,11 +39,11 @@ var MerkleTools = function (treeOptions) {
   tree.levels = []
   tree.isReady = false
 
-    /// /////////////////////////////////////////
-    // Public Primary functions
-    /// /////////////////////////////////////////
+  /// /////////////////////////////////////////
+  // Public Primary functions
+  /// /////////////////////////////////////////
 
-    // Resets the current tree to empty
+  // Resets the current tree to empty
   this.resetTree = function () {
     tree = {}
     tree.leaves = []
@@ -51,16 +51,16 @@ var MerkleTools = function (treeOptions) {
     tree.isReady = false
   }
 
-    // Add a leaf to the tree
-    // Accepts hash value as a Buffer or hex string
+  // Add a leaf to the tree
+  // Accepts hash value as a Buffer or hex string
   this.addLeaf = function (value, doHash) {
     tree.isReady = false
     if (doHash) value = hashFunction(value)
     tree.leaves.push(_getBuffer(value))
   }
 
-    // Add a leaves to the tree
-    // Accepts hash values as an array of Buffers or hex strings
+  // Add a leaves to the tree
+  // Accepts hash values as an array of Buffers or hex strings
   this.addLeaves = function (valuesArray, doHash) {
     tree.isReady = false
     valuesArray.forEach(function (value) {
@@ -69,7 +69,7 @@ var MerkleTools = function (treeOptions) {
     })
   }
 
-    // Returns a leaf at the given index
+  // Returns a leaf at the given index
   this.getLeaf = function (index) {
     var leafLevelIndex = tree.levels.length - 1
     if (index < 0 || index > tree.levels[leafLevelIndex].length - 1) return null // index is out of array bounds
@@ -77,17 +77,17 @@ var MerkleTools = function (treeOptions) {
     return tree.levels[leafLevelIndex][index]
   }
 
-    // Returns the number of leaves added to the tree
+  // Returns the number of leaves added to the tree
   this.getLeafCount = function () {
     return tree.leaves.length
   }
 
-    // Returns the ready state of the tree
+  // Returns the ready state of the tree
   this.getTreeReadyState = function () {
     return tree.isReady
   }
 
-    // Generates the merkle tree
+  // Generates the merkle tree
   this.makeTree = function (doubleHash) {
     tree.isReady = false
     var leafCount = tree.leaves.length
@@ -101,7 +101,7 @@ var MerkleTools = function (treeOptions) {
     tree.isReady = true
   }
 
-    // Generates a Bitcoin style merkle tree
+  // Generates a Bitcoin style merkle tree
   this.makeBTCTree = function (doubleHash) {
     tree.isReady = false
     var leafCount = tree.leaves.length
@@ -115,13 +115,13 @@ var MerkleTools = function (treeOptions) {
     tree.isReady = true
   }
 
-    // Returns the merkle root value for the tree
+  // Returns the merkle root value for the tree
   this.getMerkleRoot = function () {
     if (!tree.isReady || tree.levels.length === 0) return null
     return tree.levels[0][0]
   }
 
-    // Returns the proof for a leaf at the given index as an array of merkle siblings in hex format
+  // Returns the proof for a leaf at the given index as an array of merkle siblings in hex format
   this.getProof = function (index, asBinary) {
     if (!tree.isReady) return null
     var currentRowIndex = tree.levels.length - 1
@@ -158,8 +158,8 @@ var MerkleTools = function (treeOptions) {
     return proof
   }
 
-    // Takes a proof array, a target hash value, and a merkle root
-    // Checks the validity of the proof and return true or false
+  // Takes a proof array, a target hash value, and a merkle root
+  // Checks the validity of the proof and return true or false
   this.validateProof = function (proof, targetHash, merkleRoot) {
     targetHash = _getBuffer(targetHash)
     merkleRoot = _getBuffer(merkleRoot)
@@ -179,12 +179,12 @@ var MerkleTools = function (treeOptions) {
     return proofHash.toString('hex') === merkleRoot.toString('hex')
   }
 
-    /// ///////////////////////////////////////
-    // Private Utility functions
-    /// ///////////////////////////////////////
+  /// ///////////////////////////////////////
+  // Private Utility functions
+  /// ///////////////////////////////////////
 
-    // Internally, trees are made of nodes containing Buffer values only
-    // This helps ensure that leaves being added are Buffers, and will convert hex to Buffer if needed
+  // Internally, trees are made of nodes containing Buffer values only
+  // This helps ensure that leaves being added are Buffers, and will convert hex to Buffer if needed
   function _getBuffer (value) {
     if (value instanceof Buffer) { // we already have a buffer, so return it
       return value
@@ -200,8 +200,8 @@ var MerkleTools = function (treeOptions) {
     return hexRegex.test(value)
   }
 
-    // Calculates the next level of node when building the merkle tree
-    // These values are calcalated off of the current highest level, level 0 and will be prepended to the levels array
+  // Calculates the next level of node when building the merkle tree
+  // These values are calcalated off of the current highest level, level 0 and will be prepended to the levels array
   function _calculateNextLevel (doubleHash) {
     var nodes = []
     var topLevel = tree.levels[0]
@@ -220,7 +220,7 @@ var MerkleTools = function (treeOptions) {
     return nodes
   }
 
-    // This version uses the BTC method of duplicating the odd ending nodes
+  // This version uses the BTC method of duplicating the odd ending nodes
   function _calculateBTCNextLevel (doubleHash) {
     var nodes = []
     var topLevel = tree.levels[0]
