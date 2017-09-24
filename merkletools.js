@@ -83,10 +83,9 @@ var MerkleTools = function (treeOptions) {
 
   // Returns a leaf at the given index
   this.getLeaf = function (index) {
-    var leafLevelIndex = tree.levels.length - 1
-    if (index < 0 || index > tree.levels[leafLevelIndex].length - 1) return null // index is out of array bounds
+    if (index < 0 || index > tree.leaves.length - 1) return null // index is out of array bounds
 
-    return tree.levels[leafLevelIndex][index]
+    return tree.leaves[index]
   }
 
   // Returns the number of leaves added to the tree

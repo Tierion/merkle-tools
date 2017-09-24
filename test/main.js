@@ -46,6 +46,58 @@ describe('Test basic functions', function () {
     })
   })
 
+  describe('getLeaf after running makeTree', function () {
+    var merkleTools = new MerkleTools()
+    merkleTools.addLeaves([
+      'a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb',
+      'cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c'
+    ])
+    merkleTools.makeTree()
+
+    it('returned leaf should be in right spot', function () {
+      assert.equal(merkleTools.getLeaf(0).toString('hex'), 'a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb')
+    })
+  })
+
+  describe('getLeaf out of bounds returns null after running makeTree', function () {
+    var merkleTools = new MerkleTools()
+    merkleTools.addLeaves([
+      'a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb',
+      'cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c'
+    ])
+    merkleTools.makeTree()
+
+    it('out of bounds leaf position returns null', function () {
+      assert.equal(merkleTools.getLeaf(3), null)
+      assert.equal(merkleTools.getLeaf(-1), null)
+    })
+  })
+
+  describe('getLeaf before running makeTree', function () {
+    var merkleTools = new MerkleTools()
+    merkleTools.addLeaves([
+      'a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb',
+      'cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c'
+    ])
+
+    it('returned leaf should be in right spot', function () {
+      assert.equal(merkleTools.getLeaf(0).toString('hex'), 'a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb')
+    })
+  })
+
+  describe('getLeaf out of bounds returns null before running makeTree', function () {
+    var merkleTools = new MerkleTools()
+    merkleTools.addLeaves([
+      'a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb',
+      'cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c'
+    ])
+
+    it('out of bounds leaf position returns null', function () {
+      assert.equal(merkleTools.getLeaf(3), null)
+      assert.equal(merkleTools.getLeaf(-1), null)
+    })
+  })
+
   describe('reset tree', function () {
     var merkleTools = new MerkleTools()
     merkleTools.addLeaves([
