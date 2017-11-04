@@ -148,9 +148,9 @@ var proof = merkleTools.getProof(2, true)
 
 The proof array contains a set of merkle sibling objects. Each object contains the sibling hash, with the key value of either right or left. The right or left value tells you where that sibling was in relation to the current hash being evaluated. This information is needed for proof validation, as explained in the following section.
 
-### validateProof(proof, targetHash, merkleRoot)
+### validateProof(proof, targetHash, merkleRoot, doubleHash)
 
-Returns a boolean indicating whether or not the proof is valid and correctly connects the targetHash to the merkleRoot. Proof is a proof array as supplied by the 'getProof' method. The targetHash and merkleRoot parameters must be Buffers or hex strings.
+Returns a boolean indicating whether or not the proof is valid and correctly connects the targetHash to the merkleRoot. Proof is a proof array as supplied by the 'getProof' method. The targetHash and merkleRoot parameters must be Buffers or hex strings. Setting doubleHash to true will double each hash operation to match the Bitcoin merkle tree style.
 
 ```js
 var proof = [
