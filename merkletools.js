@@ -1,5 +1,3 @@
-'use strict'
-
 /* Copyright 2017 Tierion
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -34,13 +32,13 @@ var MerkleTools = function (treeOptions) {
   var hashFunction = function (value) {
     switch (hashType) {
       case 'SHA3-224':
-        return new Buffer(sha3224.array(value))
+        return Buffer.from(sha3224.array(value))
       case 'SHA3-256':
-        return new Buffer(sha3256.array(value))
+        return Buffer.from(sha3256.array(value))
       case 'SHA3-384':
-        return new Buffer(sha3384.array(value))
+        return Buffer.from(sha3384.array(value))
       case 'SHA3-512':
-        return new Buffer(sha3512.array(value))
+        return Buffer.from(sha3512.array(value))
       default:
         return crypto.createHash(hashType).update(value).digest()
     }
@@ -152,7 +150,7 @@ var MerkleTools = function (treeOptions) {
       var siblingIndex = isRightNode ? (index - 1) : (index + 1)
 
       if (asBinary) {
-        proof.push(new Buffer(isRightNode ? [0x00] : [0x01]))
+        proof.push(Buffer.from(isRightNode ? [0x00] : [0x01]))
         proof.push(tree.levels[x][siblingIndex])
       } else {
         var sibling = {}
@@ -200,7 +198,7 @@ var MerkleTools = function (treeOptions) {
     if (value instanceof Buffer) { // we already have a buffer, so return it
       return value
     } else if (_isHex(value)) { // the value is a hex string, convert to buffer and return
-      return new Buffer(value, 'hex')
+      return Buffer.from(value, 'hex')
     } else { // the value is neither buffer nor hex string, will not process this, throw error
       throw new Error("Bad hex value - '" + value + "'")
     }

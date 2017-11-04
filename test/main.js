@@ -4,11 +4,11 @@ var assert = require('assert')
 var crypto = require('crypto')
 var MerkleTools = require('../merkletools.js')
 
-var bLeft = new Buffer('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')
-var bRight = new Buffer('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')
+var bLeft = Buffer.from('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')
+var bRight = Buffer.from('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')
 var mRoot = crypto.createHash('sha256').update(Buffer.concat([bLeft, bRight])).digest()
-var bLeftmd5 = new Buffer('0cc175b9c0f1b6a831c399e269772661', 'hex')
-var bRightmd5 = new Buffer('92eb5ffee6ae2fec3ad71c777531578f', 'hex')
+var bLeftmd5 = Buffer.from('0cc175b9c0f1b6a831c399e269772661', 'hex')
+var bRightmd5 = Buffer.from('92eb5ffee6ae2fec3ad71c777531578f', 'hex')
 var mRootmd5 = crypto.createHash('md5').update(Buffer.concat([bLeftmd5, bRightmd5])).digest()
 
 describe('Test basic functions', function () {
@@ -312,7 +312,7 @@ describe('Test basic functions', function () {
     var proof = merkleTools.getProof(0, true)
 
     it('binary proof array should be correct', function () {
-      var expectedResult = [new Buffer([0x01]), new Buffer('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')]
+      var expectedResult = [Buffer.from([0x01]), Buffer.from('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')]
       assert.deepEqual(proof, expectedResult)
     })
   })
@@ -325,7 +325,7 @@ describe('Test basic functions', function () {
     var proof = merkleTools.getProof(1, true)
 
     it('binary proof array should be correct', function () {
-      var expectedResult = [new Buffer([0x00]), new Buffer('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')]
+      var expectedResult = [Buffer.from([0x00]), Buffer.from('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')]
       assert.deepEqual(proof, expectedResult)
     })
   })
