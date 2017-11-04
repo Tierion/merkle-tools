@@ -139,13 +139,13 @@ var MerkleTools = function (treeOptions) {
     var proof = []
     for (var x = currentRowIndex; x > 0; x--) {
       var currentLevelNodeCount = tree.levels[x].length
-            // skip if this is an odd end node
+      // skip if this is an odd end node
       if (index === currentLevelNodeCount - 1 && currentLevelNodeCount % 2 === 1) {
         index = Math.floor(index / 2)
         continue
       }
 
-            // determine the sibling for the current index and get its value
+      // determine the sibling for the current index and get its value
       var isRightNode = index % 2
       var siblingIndex = isRightNode ? (index - 1) : (index + 1)
 
@@ -176,19 +176,13 @@ var MerkleTools = function (treeOptions) {
 
     var proofHash = targetHash
     for (var x = 0; x < proof.length; x++) {
-        if (proof[x].left) { // then the sibling is a left node
-            if (doubleHash)
-                proofHash = hashFunction(hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash])))
-            else
-                proofHash = hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash]))
-        } else if (proof[x].right) { // then the sibling is a right node
-            if (doubleHash)
-                proofHash = hashFunction(hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)])))
-            else
-                proofHash = hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)]))
-        } else { // no left or right designation exists, proof is invalid
-            return false
-        }
+      if (proof[x].left) { // then the sibling is a left node
+        if (doubleHash) { proofHash = hashFunction(hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash]))) } else { proofHash = hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash])) }
+      } else if (proof[x].right) { // then the sibling is a right node
+        if (doubleHash) { proofHash = hashFunction(hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)]))) } else { proofHash = hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)])) }
+      } else { // no left or right designation exists, proof is invalid
+        return false
+      }
     }
 
     return proofHash.toString('hex') === merkleRoot.toString('hex')
@@ -255,9 +249,9 @@ var MerkleTools = function (treeOptions) {
   }
 }
 
-MerkleTools.validate = function(proof, targetHash, merkleRoot, doubleHash, opts) {
-    var m = new MerkleTools(opts);
-    return m.validateProof(proof, targetHash, merkleRoot, doubleHash);
+MerkleTools.validate = function (proof, targetHash, merkleRoot, doubleHash, opts) {
+  var m = new MerkleTools(opts)
+  return m.validateProof(proof, targetHash, merkleRoot, doubleHash)
 }
 
 module.exports = MerkleTools
