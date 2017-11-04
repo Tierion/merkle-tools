@@ -169,20 +169,26 @@ var MerkleTools = function (treeOptions) {
 
   // Takes a proof array, a target hash value, and a merkle root
   // Checks the validity of the proof and return true or false
-  this.validateProof = function (proof, targetHash, merkleRoot) {
+  this.validateProof = function (proof, targetHash, merkleRoot, doubleHash) {
     targetHash = _getBuffer(targetHash)
     merkleRoot = _getBuffer(merkleRoot)
     if (proof.length === 0) return targetHash.toString('hex') === merkleRoot.toString('hex') // no siblings, single item tree, so the hash should also be the root
 
     var proofHash = targetHash
     for (var x = 0; x < proof.length; x++) {
-      if (proof[x].left) { // then the sibling is a left node
-        proofHash = hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash]))
-      } else if (proof[x].right) { // then the sibling is a right node
-        proofHash = hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)]))
-      } else { // no left or right designation exists, proof is invalid
-        return false
-      }
+        if (proof[x].left) { // then the sibling is a left node
+            if (doubleHash)
+                proofHash = hashFunction(hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash])))
+            else
+                proofHash = hashFunction(Buffer.concat([_getBuffer(proof[x].left), proofHash]))
+        } else if (proof[x].right) { // then the sibling is a right node
+            if (doubleHash)
+                proofHash = hashFunction(hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)])))
+            else
+                proofHash = hashFunction(Buffer.concat([proofHash, _getBuffer(proof[x].right)]))
+        } else { // no left or right designation exists, proof is invalid
+            return false
+        }
     }
 
     return proofHash.toString('hex') === merkleRoot.toString('hex')
@@ -247,6 +253,11 @@ var MerkleTools = function (treeOptions) {
     }
     return nodes
   }
+}
+
+MerkleTools.validate = function(proof, targetHash, merkleRoot, doubleHash, opts) {
+    var m = new MerkleTools(opts);
+    return m.validateProof(proof, targetHash, merkleRoot, doubleHash);
 }
 
 module.exports = MerkleTools
