@@ -249,9 +249,4 @@ var MerkleTools = function (treeOptions) {
   }
 }
 
-MerkleTools.validate = function (proof, targetHash, merkleRoot, doubleHash, opts) {
-  var m = new MerkleTools(opts)
-  return m.validateProof(proof, targetHash, merkleRoot, doubleHash)
-}
-
 module.exports = MerkleTools
