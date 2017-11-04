@@ -271,7 +271,7 @@ describe('Test basic functions', function () {
 
   describe('make tree using md5', function () {
     var merkleTools = new MerkleTools(
-        { hashType: 'md5' })
+      { hashType: 'md5' })
     merkleTools.addLeaves([bLeftmd5, bRightmd5])
     merkleTools.makeTree()
 
@@ -402,6 +402,22 @@ describe('Test basic functions', function () {
     merkleTools.makeTree()
     var proof = merkleTools.getProof(1)
     var isValid = merkleTools.validateProof(proof, '3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d', 'd71f8983ad4ee170f8129f1ebcdd7440be7798d8e1c80420bf11f1eced610dba')
+
+    it('proof should be valid', function () {
+      assert.equal(isValid, true)
+    })
+  })
+
+  describe('validate good proof BTC doubleHash', function () {
+    var merkleTools = new MerkleTools()
+    merkleTools.addLeaves([
+      '1a02db5db5a24c5edc5b653051d8aaaddec3f9abc30354f7df358c49fe40f735',
+      'd3f3eb471e368a27f5320ff7a961bed748519139435cf8348e84ebd6225d7150',
+      '7cbcf6b5378e3e43b39734baa578efa501d02abf90289547f0e6621ee959f0e3'
+    ])
+    merkleTools.makeBTCTree(true)
+    var proof = merkleTools.getProof(1)
+    var isValid = merkleTools.validateProof(proof, 'd3f3eb471e368a27f5320ff7a961bed748519139435cf8348e84ebd6225d7150', '502606f374e3e0ec3b7022bfe6631b9a9c9f5cf6dcbe74f171ef5b14676c9ee0', true)
 
     it('proof should be valid', function () {
       assert.equal(isValid, true)
