@@ -3,6 +3,7 @@
   "version": "1.4.0",
   "description": "Tools for creating merkle trees, generating merkle proofs, and verification of merkle proofs.",
   "main": "merkletools.js",
+  "types": "merkletools.d.ts",
   "scripts": {
     "test": "mocha test/*.js",
     "benchmark": "node benchmark.js"
