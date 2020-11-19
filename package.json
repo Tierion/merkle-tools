@@ -1,12 +1,11 @@
 {
   "name": "merkle-tools",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Tools for creating merkle trees, generating merkle proofs, and verification of merkle proofs.",
   "main": "merkletools.js",
   "types": "merkletools.d.ts",
   "scripts": {
-    "test": "mocha test/*.js",
-    "benchmark": "node benchmark.js"
+    "test": "mocha test/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +24,9 @@
   },
   "homepage": "https://github.com/Tierion/merkle-tools#readme",
   "dependencies": {
-    "js-sha3": "^0.5.7"
+    "js-sha3": "^0.8.0"
   },
   "devDependencies": {
-    "benchmark": "^2.1.3",
-    "mocha": "^3.2.0"
+    "mocha": "^8.2.1"
   }
 }
