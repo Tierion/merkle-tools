@@ -28,6 +28,29 @@ var treeOptions = {
 var merkleTools = new MerkleTools(treeOptions) // treeOptions is optional
 ```
 
+### Import with Typescript
+
+- If compiler is targeting CommonJS modules import assignment can be used:
+
+```ts
+import MerkleTools = require('merkle-tools');
+```
+
+- If you prefer to use default import or if compiler is not targeting CommonJS modules, enable `esModuleInterop`:
+
+```json
+// tsconfig.json
+{
+    "compilerOptions": {
+        "esModuleInterop": true
+    }
+}
+```
+
+```ts
+import MerkleTools from 'merkle-tools';
+```
+
 ## Methods
 
 ### addLeaf(value, doHash)
