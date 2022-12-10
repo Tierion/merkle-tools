@@ -1,5 +1,5 @@
 declare module 'merkle-tools' {
-  export type Proof<T> = { left: T } | { right: T };
+  type Proof<T> = { left: T } | { right: T };
 
   class MerkleTree {
     constructor(options: { hashType: string });
@@ -23,5 +23,5 @@ declare module 'merkle-tools' {
     ): boolean;
   }
 
-  export default MerkleTree;
+  export = MerkleTree;
 }
