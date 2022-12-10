@@ -2,7 +2,7 @@ declare module 'merkle-tools' {
   type Proof<T> = { left: T } | { right: T };
 
   class MerkleTree {
-    constructor(options: { hashType: string });
+    constructor(options?: { hashType: string });
 
     getMerkleRoot(): Buffer | null;
     getProof(index: number): Proof<string>[] | null;

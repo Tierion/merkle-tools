@@ -36,10 +36,9 @@ var merkleTools = new MerkleTools(treeOptions) // treeOptions is optional
 import MerkleTools = require('merkle-tools');
 ```
 
-- If you prefer to use default import or if compiler is not targeting CommonJS modules, enable `esModuleInterop`:
+- If you prefer to use default import or if compiler is not targeting CommonJS modules, enable `esModuleInterop` on your tsconfig:
 
 ```json
-// tsconfig.json
 {
     "compilerOptions": {
         "esModuleInterop": true
