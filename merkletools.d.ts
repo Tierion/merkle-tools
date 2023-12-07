@@ -16,7 +16,7 @@ declare module 'merkle-tools' {
     makeTree(doubleHash?: boolean): void;
     makeBTCTree(doubleHash?: boolean): void;
     validateProof(
-      proof: Proof<string | Buffer>,
+      proof: readonly Proof<string | Buffer>[],
       targetHash: string | Buffer,
       merkleRoot: string | Buffer,
       doubleHash?: boolean,
